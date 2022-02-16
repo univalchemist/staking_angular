@@ -1,0 +1,217 @@
+@use 'common' as c;
+@use 'styles/default.scss';
+@use 'styles/colors.scss';
+@use 'styles/buttons.scss';
+
+h1.heading {
+    font-size: c.px2rem(32);
+    color: c.$white;
+    line-height: c.px2rem(40);
+    margin-top: c.px2rem(72);
+}
+
+p.heading-description {
+    color: map-get(c.$gray, 3);
+    font-size: c.px2rem(16);
+    line-height: c.px2rem(24);
+    margin-top: c.px2rem(8);
+}
+
+.widget {
+    background: map-get(c.$gray, 7);
+    border-radius: c.px2rem(8);
+    min-height: c.px2rem(230);
+    &__header {
+        padding: c.px2rem(24);
+        display: flex;
+        justify-content: space-between;
+        &_pool {
+            display: flex;
+            & mat-icon {
+                cursor: pointer;
+                width: c.px2rem(13);
+                height: c.px2rem(13);
+                padding: c.px2rem(12);
+                margin-right: c.px2rem(12);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: c.px2rem(8);
+                &:hover {
+                    background: map-get(c.$gray, 2);
+                }
+            }
+            & .img {
+                margin-right: c.px2rem(16);
+            }
+            & .text {
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                & .title {
+                    color: c.$white;
+                    font-size: c.px2rem(20);
+                    line-height: c.px2rem(28);
+                }
+                & .description {
+                    color: map-get(c.$gray, 3);
+                    font-size: c.px2rem(14);
+                    line-height: c.px2rem(20);
+                }
+            }
+        }
+        &_status {
+            width: c.px2rem(67);
+            height: c.px2rem(28);
+            font-size: c.px2rem(14);
+            line-height: c.px2rem(20);
+            border-radius: c.px2rem(8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &.active {
+                background: map-get(c.$green, 3);
+                color: map-get(c.$green, 1);
+            }
+        }
+    }
+    &__running-text {
+        background: map-get(c.$gray, 2);
+        height: c.px2rem(40);
+        width: 100%;
+    }
+    &__footer {
+        padding: c.px2rem(24);
+        padding-bottom: 0;
+        & .connect {
+            margin-bottom: c.px2rem(24);
+        }
+        &_actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            & .row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: c.px2rem(24) 0;
+                &:not(:last-child) {
+                    border-bottom: c.px2rem(1) solid map-get(c.$gray, 2);
+                }
+                & .text {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: left;
+                    & .value {
+                        color: c.$white;
+                        font-size: c.px2rem(20);
+                        line-height: c.px2rem(28);
+                    }
+                    & .description {
+                        color: map-get(c.$gray, 3);
+                        font-size: c.px2rem(14);
+                        line-height: c.px2rem(20);
+                    }
+                }
+                & .btn-primary {
+                    max-width: c.px2rem(80);
+                    width: 100%;
+                    padding: c.px2rem(14) c.px2rem(20);
+                }
+            }
+        }
+    }
+}
+
+.mat-dialog-container {
+    background: map-get(c.$gray, 1);
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: map-get(c.$gray, 3);
+}
+
+@media screen and (max-width: 600px) {
+    h1.heading {
+        font-size: c.px2rem(32, c.$mobile_size);
+        line-height: c.px2rem(40, c.$mobile_size);
+        margin-top: c.px2rem(72, c.$mobile_size);
+    }
+
+    p.heading-description {
+        font-size: c.px2rem(16, c.$mobile_size);
+        line-height: c.px2rem(24, c.$mobile_size);
+        margin-top: c.px2rem(8, c.$mobile_size);
+    }
+
+    .widget {
+        border-radius: c.px2rem(8, c.$mobile_size);
+        min-height: c.px2rem(230, c.$mobile_size);
+        &__header {
+            padding: c.px2rem(24, c.$mobile_size);
+            &_pool {
+                & mat-icon {
+                    width: c.px2rem(36, c.$mobile_size);
+                    height: c.px2rem(36, c.$mobile_size);
+                }
+                & .img {
+                    margin-right: c.px2rem(16);
+                }
+                & .text {
+                    & .title {
+                        font-size: c.px2rem(20, c.$mobile_size);
+                        line-height: c.px2rem(28, c.$mobile_size);
+                    }
+                    & .description {
+                        font-size: c.px2rem(14, c.$mobile_size);
+                        line-height: c.px2rem(20, c.$mobile_size);
+                    }
+                }
+            }
+            &_status {
+                width: c.px2rem(67, c.$mobile_size);
+                height: c.px2rem(28, c.$mobile_size);
+                font-size: c.px2rem(14, c.$mobile_size);
+                line-height: c.px2rem(20, c.$mobile_size);
+                border-radius: c.px2rem(8, c.$mobile_size);
+            }
+        }
+        &__running-text {
+            height: c.px2rem(40, c.$mobile_size);
+        }
+        &__footer {
+            padding: c.px2rem(24, c.$mobile_size);
+            & .connect {
+                margin-bottom: c.px2rem(24, c.$mobile_size);
+            }
+            &_actions {
+                & .row {
+                    padding: c.px2rem(24, 24) 0;
+                    &:not(:last-child) {
+                        border-bottom: c.px2rem(1, 24) solid map-get(c.$gray, 2);
+                    }
+                    & .text {
+                        display: flex;
+                        flex-direction: column;
+                        text-align: left;
+                        & .value {
+                            color: c.$white;
+                            font-size: c.px2rem(20, c.$mobile_size);
+                            line-height: c.px2rem(28, c.$mobile_size);
+                        }
+                        & .description {
+                            font-size: c.px2rem(14, c.$mobile_size);
+                            line-height: c.px2rem(20, c.$mobile_size);
+                        }
+                    }
+                    & .btn-primary {
+                        max-width: c.px2rem(80, c.$mobile_size);
+                        padding: c.px2rem(14, 24) c.px2rem(20, c.$mobile_size);
+                    }
+                }
+            }
+        }
+    }
+}

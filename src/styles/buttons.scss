@@ -1,0 +1,90 @@
+@use 'colors' as c;
+@use 'functions' as f;
+
+%_common{
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: f.px2rem(14);
+    border-radius: f.px2rem(8);
+}
+
+@mixin btn(){
+    @extend %_common !optional;
+    border: none;
+    height: auto;
+    line-height: f.px2rem(20);
+    color: c.$white;
+    margin-right: f.px2rem(4);
+    cursor: pointer;
+    transition: .3s;
+    &.full {
+        width: 100%;
+    }
+}
+
+.btn-primary {
+    @include btn();
+    background: map-get(c.$purple, 1);
+    padding: f.px2rem(10) f.px2rem(20);
+    &:hover {
+        background: map-get(c.$purple, 2);
+    }
+    &.red {
+        background: map-get(c.$red, 1);
+        &:hover {
+            background: map-get(c.$red, 2);
+        }
+    }
+    &.green {
+        background: map-get(c.$green, 1);
+        &:hover {
+            background: map-get(c.$green, 2);
+        }
+    }
+
+    &.disabled {
+        pointer-events: none;
+        background: map-get(c.$gray, 2);
+        color: map-get(c.$gray, 6);
+    }
+}
+
+.btn-dark {
+    @include btn();
+    background: map-get(c.$gray, 2);
+    color: map-get(c.$gray, 3);
+    padding: f.px2rem(10) 0;
+    width: f.px2rem(97);
+    &.active {
+        background: map-get(c.$gray, 8);
+        color: c.$white;
+        border-radius: f.px2rem(30);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    %_common{
+        font-size: f.px2rem(14, c.$mobile_size);
+        border-radius: f.px2rem(8, c.$mobile_size);
+    }
+    
+    @mixin btn(){
+        @extend %_common !optional;
+        line-height: f.px2rem(20, c.$mobile_size);
+        margin-right: f.px2rem(4, c.$mobile_size);
+    }
+    
+    .btn-primary {
+        @include btn();
+        padding: f.px2rem(10, c.$mobile_size) f.px2rem(20, c.$mobile_size);
+    }
+    
+    .btn-dark {
+        @include btn();
+        padding: f.px2rem(10, c.$mobile_size) 0;
+        width: f.px2rem(97, c.$mobile_size);
+        &.active {
+            border-radius: f.px2rem(30, c.$mobile_size);
+        }
+    }
+}

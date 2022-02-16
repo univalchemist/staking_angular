@@ -1,0 +1,7 @@
+export enum BlockchainStatusCodes {
+  USER_REJECT = 4001,
+  NO_CHAIN = 4902,
+  CANT_SPECIFY_DEFAULT_CHAIN = -32602,
+  ABORTED = 'ABORTED',
+  SUCCESS = 'SUCCESS'
+}

@@ -1,0 +1,39 @@
+<ng-container *ngIf="networks && currentNetwork">
+  <div class="selected-network"
+       [class.active]="isOpenedMenu"
+       [matMenuTriggerFor]="switchNetworkMenu"
+       (menuOpened)="menuOpened()"
+       (menuClosed)="menuClosed()"
+       [class.small]="isSmallScreen">
+    <div class="network-item">
+      <mat-icon class="network-icon" [svgIcon]="currentNetwork.icon"></mat-icon>
+      <span class="network-text">{{currentAddress | short :4 :3}}</span>
+    </div>
+    <mat-icon class="dropdown-arrow" svgIcon="arrow-filled"></mat-icon>
+  </div>
+
+  <mat-menu class="mat-menu-panel switch-network-menu"
+            #switchNetworkMenu="matMenu">
+    <span class="menu-arrow"></span>
+    <div class="options-list mat-menu">
+      <ng-container *ngFor="let option of networkList">
+        <div class="network-item"
+             (click)="selectNetwork(option)"
+        >
+          <mat-icon class="network-icon" [svgIcon]="option.icon"></mat-icon>
+          <span class="network-text">Switch to {{option.name.length < 4 ? (option.name | uppercase) : option.name | titlecase}}</span>
+        </div>
+      </ng-container>
+
+      <div class="divider" *ngIf="networkList.length"></div>
+
+      <div class="change-wallet-provider network-item" (click)="switchNetwork()">
+        <mat-icon class="network-icon" svgIcon="swap"></mat-icon>
+        <span class="network-text">Change Wallet Provider</span>
+      </div>
+      <div class="btns__wrapper">
+        <div class="btn-primary red" (click)="disconnect()">Disconnect</div>
+      </div>
+    </div>
+  </mat-menu>
+</ng-container>

@@ -1,0 +1,136 @@
+@use 'src/styles/common' as c;
+
+:host {
+    width: 100%;
+    text-align: center;
+    padding-top: c.px2rem(42);
+}
+
+.lace {
+    padding: 0 c.px2rem(40);
+    &__content {
+        margin-top: c.px2rem(36);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        & .finished {
+            color: map-get(c.$gray, 3);
+            font-size: c.px2rem(16);
+            line-height: c.px2rem(24);
+            margin-top: c.px2rem(8);
+            width: 100%;
+        }
+    }
+}
+
+
+.switch-buttons {
+    display: flex;
+    background: map-get(c.$gray, 7);
+    width: fit-content;
+    border-radius: c.px2rem(30);
+    margin: 0 auto;
+    margin-top: c.px2rem(24);
+    position: relative;
+    & .btn-switch {
+        width: c.px2rem(97);
+        height: c.px2rem(40);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        & .text {
+            z-index: 100;
+            color: map-get(c.$gray, 3);
+            font-size: c.px2rem(16);
+            line-height: c.px2rem(24);
+        }
+        &.active {
+            & .text {
+                color: c.$white;
+            }
+        }
+    }
+    & .animation {
+        width: c.px2rem(97);
+        height: c.px2rem(40);
+        border-radius: c.px2rem(30);
+        background: map-get(c.$gray, 8);
+        position: absolute;
+        z-index: 10;
+        opacity: .7;
+    }
+}
+
+.left-animation {
+    animation:  left-anim .3s linear;
+    left: 50%;
+}
+
+.right-animation {
+    animation: right-anim .3s linear;
+    left: 0;
+}
+
+
+@keyframes left-anim {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: 50%;
+    }
+}
+
+@keyframes right-anim {
+    0% {
+        left: 50%;
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :host {
+        padding-top: c.px2rem(30);
+    }
+    .lace {
+        & h1 {
+            margin-top: 0;
+        }
+        & h1, p {
+            text-align: left;
+        }
+        padding: 0 c.px2rem(40, c.$mobile_size);
+        padding-top: 0;
+        &__content {
+            margin-top: c.px2rem(36, c.$mobile_size);
+            & .finished {
+                font-size: c.px2rem(16, c.$mobile_size);
+                line-height: c.px2rem(24, c.$mobile_size);
+                margin-top: c.px2rem(8, c.$mobile_size);
+            }
+        }
+    }
+
+
+    .switch-buttons {
+        border-radius: c.px2rem(30, c.$mobile_size);
+        margin: 0;
+        margin-top: c.px2rem(24, c.$mobile_size);
+        & .btn-switch {
+            width: c.px2rem(97, c.$mobile_size);
+            height: c.px2rem(40, c.$mobile_size);
+            & .text {
+                font-size: c.px2rem(16, c.$mobile_size);
+                line-height: c.px2rem(24, c.$mobile_size);
+            }
+        }
+        & .animation {
+            width: c.px2rem(97, c.$mobile_size);
+            height: c.px2rem(40, c.$mobile_size);
+            border-radius: c.px2rem(30, c.$mobile_size);
+        }
+    }
+}

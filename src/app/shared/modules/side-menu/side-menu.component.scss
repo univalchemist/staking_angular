@@ -1,0 +1,54 @@
+@use 'common' as c;
+
+.side-menu {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    height: 100vh;
+    top: 0;
+    background: map-get(c.$gray, 1);
+    z-index: 1001;
+    &__header {
+        height: c.px2rem(60);
+        border-bottom: c.px2rem(1) solid map-get(c.$gray, 2);
+        display: flex;
+        align-items: center;
+        padding-left: c.px2rem(20);
+    }
+    &__nav {
+        padding-top: c.px2rem(16);
+        height: calc(100vh - 61px - 40px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &_links {
+            display: flex;
+            flex-direction: column;
+        }
+        &_tokens {
+            color: c.$white;
+            padding-left: c.px2rem(16);
+            display: flex;
+            align-items: center;
+            font-size: c.px2rem(14);
+            line-height: c.px2rem(20);
+            & mat-icon {
+                margin-right: c.px2rem(10);
+            }
+        }
+        & .link {
+            width: 100%;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 500;
+            font-size: c.px2rem(16);
+            line-height: c.px2rem(24);
+            color: c.$white;
+            padding: c.px2rem(18) c.px2rem(30);
+            text-decoration: none;
+            &:hover {
+                background: map-get(c.$gray, 7);
+            }
+        }
+    }
+}

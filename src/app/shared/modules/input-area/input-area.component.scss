@@ -1,0 +1,130 @@
+@use 'common' as c;
+
+:host {
+    display: block;
+    padding-top: c.px2rem(20);
+    position: relative;
+    margin: c.px2rem(24) c.px2rem(24) c.px2rem(98);
+
+    &.active {
+        padding-top: 0;
+        margin-bottom: c.px2rem(21);
+        margin-top: 0;
+    }
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: map-get(c.$gray, 1);
+    border: c.px2rem(1) solid map-get(c.$gray, 2);
+    // pointer-events: none;
+    padding: c.px2rem(12) c.px2rem(16);
+    border-radius: c.px2rem(8);
+
+    &:hover {
+        border: c.px2rem(1) solid map-get(c.$gray, 8);
+    }
+    &:focus:active {
+        border: c.px2rem(2) solid map-get(c.$purple, 1);
+    }
+    &.error {
+        border: c.px2rem(1) solid map-get(c.$red, 1);
+    }
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: c.px2rem(4);
+        &_title {
+            font-size: c.px2rem(14);
+            line-height: c.px2rem(20);
+            color: map-get(c.$gray, 3);
+        }
+        &_max {
+            font-size: c.px2rem(14);
+            line-height: c.px2rem(20);
+            color: map-get(c.$purple, 3);
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+    &__main {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        & input {
+            pointer-events: auto;
+            &.disabled {
+                color: map-get(c.$gray, 10);
+            }
+        }
+        &_currency {
+            font-size: c.px2rem(20);
+            line-height: c.px2rem(28);
+            color: map-get(c.$gray, 10);
+            white-space: nowrap;
+        }
+    }
+    &__error {
+        position: absolute;
+        top: 110%;
+        left: c.px2rem(24);
+        color: map-get(c.$red, 1);
+        font-family: Inter, sans-serif;
+        font-weight: 500;
+        font-size: c.px2rem(12);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :host {
+        padding-top: c.px2rem(20, c.$mobile_size);
+        &.active {
+            & .input-area {
+                margin-bottom: c.px2rem(21, c.$mobile_size);
+            }
+        }
+    }
+
+    .input-area {
+        border: c.px2rem(1, c.$mobile_size) solid map-get(c.$gray, 2);
+        padding: c.px2rem(12, c.$mobile_size) c.px2rem(16, c.$mobile_size);
+        margin: c.px2rem(24, c.$mobile_size) c.px2rem(24, c.$mobile_size) c.px2rem(98, c.$mobile_size);
+        border-radius: c.px2rem(8, c.$mobile_size);
+
+        &:hover {
+            border: c.px2rem(1, c.$mobile_size) solid map-get(c.$gray, 8);
+        }
+        &:focus:active {
+            border: c.px2rem(2, c.$mobile_size) solid map-get(c.$purple, 1);
+        }
+        &.error {
+            border: c.px2rem(1, c.$mobile_size) solid map-get(c.$red, 1);
+        }
+        &__header {
+            margin-bottom: c.px2rem(4, c.$mobile_size);
+            &_title {
+                font-size: c.px2rem(14, c.$mobile_size);
+                line-height: c.px2rem(20, c.$mobile_size);
+            }
+            &_max {
+                font-size: c.px2rem(14, c.$mobile_size);
+                line-height: c.px2rem(20, c.$mobile_size);
+            }
+        }
+        &__main {
+            &_currency {
+                font-size: c.px2rem(20, c.$mobile_size);
+                line-height: c.px2rem(28, c.$mobile_size);
+            }
+        }
+        &__error {
+            left: c.px2rem(24, c.$mobile_size);
+            font-size: c.px2rem(12, c.$mobile_size);
+        }
+    }
+}

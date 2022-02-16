@@ -1,0 +1,17 @@
+<section class="header">
+    <img class="header__logo" src="assets/icons/logo.svg" *ngIf="!isSmallScreen">
+    <img src="assets/icons/menu.svg" *ngIf="isSmallScreen" (click)="open()">
+    <div class="header__navigation" *ngIf="!isSmallScreen">
+        <a class="header__navigation_link" routerLink="/lace">LACE Staking</a>
+        <a class="header__navigation_link" routerLink="/nft">NFT Staking</a>
+        <a href="https://www.lovelace.world/blog" target="_blank" class="header__navigation_link">Instructions</a>
+    </div>
+
+    <div class="connection-container">
+      <div class="btn-primary" *ngIf="!isAuth || isWrongNetwork; else address" (click)="connectWallet()">Connect wallet</div>
+
+      <ng-template #address>
+          <app-network-switch></app-network-switch>
+      </ng-template>
+    </div>
+</section>

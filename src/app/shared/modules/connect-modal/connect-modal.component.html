@@ -1,0 +1,15 @@
+<div class="dialog-container">
+  <app-dialog-header title="Connect wallet"></app-dialog-header>
+
+  <mat-dialog-content class="dialog-content">
+    <p>Connect with one of available wallet providers or create a new wallet.</p>
+    <button class="connect-btn" (click)="connect()">
+      <mat-icon svgIcon="metamask"></mat-icon>
+      Metamask
+    </button>
+    <button class="connect-btn" (click)="walletconnect()">
+      <mat-icon svgIcon="walletconnect"></mat-icon>
+      Wallet Connect
+    </button>
+  </mat-dialog-content>
+</div>

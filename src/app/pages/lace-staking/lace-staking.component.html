@@ -1,0 +1,22 @@
+<section class="lace">
+    <h1 class="lace__heading heading">LACE Staking</h1>
+    <p class="lace__description heading-description">Just stake LACE or Liquidity Pool tokens to earn.</p>
+    <div class="lace__buttons switch-buttons" (click)="isFinished = !isFinished">
+        <div class="btn-switch" [class.active]="!isFinished"><span class="text">Live</span></div>
+        <div class="btn-switch" [class.active]="isFinished"><span class="text">Finished</span></div>
+        <div class="animation left-animation" 
+            [class.left-animation]="isFinished"
+            [class.right-animation]="!isFinished"
+        ></div>
+    </div>
+    <div class="lace__content">
+        <ng-template [ngIf]="!isFinished" [ngIfElse]="finished">
+            <ng-template ngFor let-pool [ngForOf]="pools">
+                <app-widget (updateData)="getUpdateDataAction($event)" [data]="pool"></app-widget>
+            </ng-template>
+        </ng-template>
+        <ng-template #finished>
+            <p class="finished">There are no any finished pools right now.</p> 
+        </ng-template>
+    </div>
+</section>

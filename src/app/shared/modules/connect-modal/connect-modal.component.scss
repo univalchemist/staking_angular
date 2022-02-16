@@ -1,0 +1,55 @@
+@use 'common' as c;
+
+.dialog-content {
+  // color: map-get(c.$black, 2);
+
+  p {
+    // @include c.body-medium;
+    color: map-get(c.$gray, 3);
+    padding-bottom: c.px2rem(24);
+  }
+
+  button.connect-btn {
+    display: flex;
+    align-items: center;
+    border-radius: c.px2rem(8);
+    border: c.px2rem(1) solid map-get(c.$gray, 7);
+    padding: c.px2rem(12) c.px2rem(16);
+    margin-bottom: c.px2rem(12);
+    width: 100%;
+    background-color: transparent;
+    color: c.$white;
+    transition: all 0.15s;
+
+    &:hover {
+      background-color: map-get(c.$gray, 7);
+    }
+
+    mat-icon {
+      width: c.px2rem(32);
+      height: c.px2rem(32);
+      margin-right: c.px2rem(16);
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dialog-content {  
+    p {
+      padding-bottom: c.px2rem(24, c.$mobile_size);
+    }
+  
+    button.connect-btn {
+      border-radius: c.px2rem(8, c.$mobile_size);
+      border: c.px2rem(1, c.$mobile_size) solid map-get(c.$gray, 7);
+      padding: c.px2rem(12, c.$mobile_size) c.px2rem(16, c.$mobile_size);
+      margin-bottom: c.px2rem(12, c.$mobile_size);
+  
+      mat-icon {
+        width: c.px2rem(32, c.$mobile_size);
+        height: c.px2rem(32, c.$mobile_size);
+        margin-right: c.px2rem(16, c.$mobile_size);
+      }
+    }
+  }
+}

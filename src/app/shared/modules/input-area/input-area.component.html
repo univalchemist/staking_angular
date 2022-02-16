@@ -1,0 +1,13 @@
+<div class="input-area" [class.error]='error'>
+    <div class="input-area__header">
+        <div class="input-area__header_title">Amount</div>
+        <div class="input-area__header_max" (click)="setMaxValue()">Max</div>
+    </div>
+    <div class="input-area__main">
+        <input [class.disabled]='disabled' [formControl]="value" type="number" placeholder="0" class="primary input">
+        <span class="input-area__main_currency">{{currency}}</span>
+    </div>
+</div>
+<div class="input-area__error">
+    {{error}}
+</div>

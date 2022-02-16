@@ -1,0 +1,20 @@
+[
+  {"name": "arrow-filled", "src": "arrow-filled"},
+  {"name": "back", "src": "back"},
+  {"name": "bsc", "src": "bsc"},
+  {"name": "check", "src": "check"},
+  {"name": "close", "src": "close"},
+  {"name": "discord", "src": "discord"},
+  {"name": "ethereum", "src": "ethereum"},
+  {"name": "lace", "src": "lace"},
+  {"name": "medium", "src": "medium"},
+  {"name": "menu", "src": "menu"},
+  {"name": "metamask", "src": "metamask"},
+  {"name": "polygon-icon", "src": "polygon-icon"},
+  {"name": "success-filled", "src": "success-filled"},
+  {"name": "swap", "src": "swap"},
+  {"name": "telegram", "src": "telegram"},
+  {"name": "twitter", "src": "twitter"},
+  {"name": "walletconnect", "src": "walletconnect-logo"}
+]
+

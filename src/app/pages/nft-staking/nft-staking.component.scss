@@ -1,0 +1,23 @@
+@use 'common' as c;
+
+:host {
+    width: 100%;
+    text-align: center;
+    padding-top: c.px2rem(42);
+}
+
+.nft {
+    padding: 0 c.px2rem(40);
+    &__content {
+        margin-top: c.px2rem(36);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .nft {
+        padding: 0 c.px2rem(40, c.$mobile_size);
+        &__content {
+            margin-top: c.px2rem(36, c.$mobile_size);
+        }
+    }
+}

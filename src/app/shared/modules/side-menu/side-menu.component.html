@@ -1,0 +1,14 @@
+<div class="side-menu" (click)="close.emit(false)" *ngIf="isOpened">
+    <div class="side-menu__header">
+        <img class="header__logo" src="assets/icons/logo.svg">
+    </div>
+    <div class="side-menu__nav">
+        <div class="side-menu__nav_links">
+            <a class="header__navigation_link link" routerLink="/lace">LACE Staking</a>
+            <a class="header__navigation_link link" routerLink="/nft">NFT Staking</a>
+        </div>
+        <div class="side-menu__nav_tokens">
+            <mat-icon svgIcon="lace"></mat-icon> {{tokens | number: '1.2-2'}} LACE
+        </div>
+    </div>
+</div>

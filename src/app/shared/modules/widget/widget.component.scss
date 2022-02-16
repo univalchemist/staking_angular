@@ -1,0 +1,138 @@
+@use 'common' as c;
+@use 'creeping-line';
+
+:host {
+    width: 49%;
+    margin-bottom: c.px2rem(24);
+
+  .creeping-line {
+    :not(&.limited-pool) {
+      .creeping-line-container {
+        animation: scroll-left-creeping-line 10s linear infinite;
+      }
+    }
+
+    &.limited-pool {
+      .creeping-line-container {
+        animation: scroll-left-creeping-line 20s linear infinite;
+      }
+    }
+  }
+}
+
+.stake-text-info {
+  color: map-get(c.$gray, 3);
+  margin: c.px2rem(24);
+  text-align: start;
+  padding: c.px2rem(12) c.px2rem(16);
+  border-radius: c.px2rem(8);
+  background-color: map-get(c.$gray, 2);
+}
+
+.stake-container {
+  min-height: c.px2rem(314);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  & > * {
+    width: 100%;
+  }
+
+  app-input-area {
+    margin-bottom: 0;
+  }
+
+  .buttons_wrapper {
+    align-self: flex-end;
+  }
+}
+
+.buttons_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: c.px2rem(22);
+    & mat-icon {
+        margin-right: c.px2rem(8);
+        color: map-get(c.$gray, 6);
+        &.no-opacity {
+            color: c.$white;
+        }
+    }
+    & .btn {
+        width: 48%;
+        padding: c.px2rem(14) 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & mat-spinner {
+            margin-right: c.px2rem(10);
+        }
+
+        &.full {
+            width: 100%;
+        }
+
+        &.opacity {
+            opacity: .8;
+            pointer-events: none;
+            &::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+                stroke: c.$white !important;
+            }
+        }
+    }
+}
+
+.collect-value {
+    border: c.px2rem(2) solid map-get(c.$gray, 2);
+    color: map-get(c.$gray, 10);
+    font-size: c.px2rem(24);
+    padding: c.px2rem(24) 0;
+    width: c.px2rem(396);
+    margin: c.px2rem(40) c.px2rem(24) c.px2rem(98);
+    line-height: c.px2rem(32);
+    &.active {
+        margin: 0 c.px2rem(24);
+        margin-top: c.px2rem(15);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    :host {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :host {
+        margin-bottom: c.px2rem(24, c.$mobile_size);
+    }
+
+    .buttons_wrapper {
+        padding: c.px2rem(22, c.$mobile_size);
+        & mat-icon {
+            margin-right: c.px2rem(8, c.$mobile_size);
+        }
+        & .btn {
+            padding: c.px2rem(14, c.$mobile_size) 0;
+            & mat-spinner {
+                margin-right: c.px2rem(10, c.$mobile_size);
+            }
+        }
+    }
+
+    .collect-value {
+        border: c.px2rem(2, c.$mobile_size) solid map-get(c.$gray, 2);
+        font-size: c.px2rem(24, c.$mobile_size);
+        padding: c.px2rem(24, c.$mobile_size) 0;
+        width: c.px2rem(396, c.$mobile_size);
+        margin: c.px2rem(40, c.$mobile_size) c.px2rem(24, c.$mobile_size) c.px2rem(98, c.$mobile_size);
+        line-height: c.px2rem(32, c.$mobile_size);
+        &.active {
+            margin: 0 c.px2rem(24, c.$mobile_size);
+        }
+    }
+}

@@ -1,0 +1,149 @@
+@use 'common' as c;
+
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-color: map-get(c.$gray, 1);
+  overflow: hidden;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  max-width: 100%;
+  width: auto;
+}
+
+article > * + * {
+  margin-top: 1em;
+}
+
+input,
+img,
+button,
+[type=button],
+textarea,
+mat-icon,
+select {
+  font: inherit;
+  outline: none;
+  -webkit-appearance: none !important;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+html, body {
+  height: 100%;
+}
+
+body, button, input, optgroup, select, textarea {
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/inter/Inter-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Inter-Medium';
+  src: url('../assets/fonts/inter/Inter-SemiBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+.mat-menu-panel {
+  background: unset;
+  overflow: auto;
+  max-height: calc(100vh - 48px);
+  outline: 0;
+  border-radius: c.px2rem(8) !important;
+  margin-top: c.px2rem(10);
+  max-width: none !important;
+  min-height: 3.25rem !important;
+  min-width: 10rem !important;
+  border: 1px solid map-get(c.$gray, 2);
+
+  .mat-menu-content {
+    padding: 0 !important;
+    width: c.px2rem(250);
+    min-height: 100%;
+  }
+
+  .menu-arrow {
+    position: absolute;
+    top: c.px2rem(4);
+    right: c.px2rem(13);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 c.px2rem(7) c.px2rem(6) c.px2rem(7);
+    z-index: 1;
+    border-color: transparent transparent map-get(c.$gray, 2) transparent;
+  }
+
+  .options-list {
+    position: relative;
+    z-index: 2;
+    padding: c.px2rem(16) 0;
+    background: map-get(c.$gray, 9);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mat-menu-panel {
+    border-radius: c.px2rem(8, c.$mobile_size) !important;
+    margin-top: c.px2rem(10, c.$mobile_size);
+
+    .mat-menu-content {
+      width: c.px2rem(250, c.$mobile_size);
+    }
+
+    .menu-arrow {
+      top: c.px2rem(4, c.$mobile_size);
+      right: c.px2rem(13, c.$mobile_size);
+      border-width: 0 c.px2rem(7, c.$mobile_size) c.px2rem(6, c.$mobile_size) c.px2rem(7, c.$mobile_size);
+    }
+
+    .options-list {
+      padding: c.px2rem(16, c.$mobile_size) 0;
+    }
+  }
+}

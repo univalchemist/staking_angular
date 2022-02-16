@@ -1,0 +1,52 @@
+@use 'common' as c;
+
+.creeping-line {
+  height: c.px2rem(40);
+  box-sizing: border-box;
+  padding: c.px2rem(10) 0;
+  background-color: map-get(c.$gray, 2);
+  width: inherit;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  &:hover {
+    & .creeping-line-container {
+      animation-play-state: paused !important;
+    }
+  }
+
+  .delimiter {
+    padding: 0 c.px2rem(12);
+  }
+
+  .creeping-line-container {
+    animation: scroll-left-creeping-line 40s linear infinite;
+    width: fit-content;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .separator {
+    padding: 0 c.px2rem(11);
+    color: map-get(c.$gray, 5);
+  }
+
+  .text {
+    font-size: c.px2rem(14);
+    line-height: c.px2rem(20);
+    color: map-get(c.$gray, 3);
+  }
+}
+
+@keyframes scroll-left-creeping-line {
+  0% {
+    transform: translatex(0);
+  }
+
+  100% {
+    transform: translatex(-100%);
+  }
+}

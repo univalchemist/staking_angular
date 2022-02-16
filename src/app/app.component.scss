@@ -1,0 +1,53 @@
+@use 'common' as c;
+
+$max-content-width: c.px2rem(1000);
+$header-height: c.px2rem(98);
+$token-info-container: c.px2rem(40);
+$main-min-height: calc(100vh - #{$header-height});
+
+.app-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  app-header,
+  .main-container {
+    max-width: $max-content-width;
+    margin: 0 auto;
+  }
+
+  app-header {
+    height: $header-height;
+  }
+
+  .main {
+    width: 100%;
+    height: $main-min-height;
+    min-height: $main-min-height;
+    overflow: hidden;
+    overflow-y: auto;
+
+    &.with-token-info {
+      height: calc(#{$main-min-height} - #{$token-info-container});
+      min-height: calc(#{$main-min-height} - #{$token-info-container});
+    }
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: inherit;
+    overflow: hidden;
+  }
+
+  router-outlet {
+    order: 2;
+  }
+
+  app-footer {
+    order: 3;
+  }
+}

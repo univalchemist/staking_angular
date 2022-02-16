@@ -1,0 +1,35 @@
+@use 'colors' as c;
+@use 'functions' as f;
+
+%_common{
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: f.px2rem(20);
+    line-height: f.px2rem(28);
+    border-radius: f.px2rem(8);
+    @media screen and (max-width: 600px) {
+      font-size: f.px2rem(20, c.$mobile_size);
+      line-height: f.px2rem(28, c.$mobile_size);
+      border-radius: f.px2rem(8, c.$mobile_size);
+    }
+    color: c.$white;
+    border: none;
+    background: transparent;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input {
+    &.primary {
+        @extend %_common !optional;
+        width: 80%
+    }
+}

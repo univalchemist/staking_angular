@@ -1,0 +1,43 @@
+@use 'common' as c;
+
+.close-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: c.px2rem(24);
+  height: c.px2rem(24);
+  border-radius: c.px2rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: map-get(c.$gray, 6);
+
+  &:hover {
+    &.hover-style {
+      background: map-get(c.$gray, 2);
+    }
+
+    [svgIcon="close"] {
+      opacity: 1;
+    }
+  }
+}
+
+[svgIcon="close"] {
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 0.5;
+    background: inherit;
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .close-button {
+    width: c.px2rem(24, c.$mobile_size);
+    height: c.px2rem(24, c.$mobile_size);
+    border-radius: c.px2rem(8, c.$mobile_size);
+  }
+}

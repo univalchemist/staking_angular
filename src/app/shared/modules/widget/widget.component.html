@@ -1,0 +1,205 @@
+<div class="widget" *ngIf="data">
+    <div class="widget__header">
+        <div class="widget__header_pool">
+            <mat-icon svgIcon="back" *ngIf="currentAction" (click)="back()"></mat-icon>
+            <img [src]="data.img" class="img">
+            <div class="text">
+                <div class="title">
+                    {{data.title}}
+                </div>
+                <div class="description">
+                    {{data.description}}
+                </div>
+            </div>
+        </div>
+        <div class="widget__header_status active">
+            Active
+        </div>
+    </div>
+    <div class="creeping-line" [class.limited-pool]="data?.limit">
+      <ng-template [ngIf]="currentData">
+        <div class="creeping-line-container" *ngFor="let item of [undefined, undefined]">
+          <p class="text"
+             *ngFor="let item of [undefined, undefined]"
+          >
+            <span class="apy">APY: {{currentApy}}%</span>
+
+            <span class="delimiter">&bull;</span>
+
+            <span class="total-staked">Total Staked: {{currentData.totalStaked | number :'1.2-2'}} {{data.tokenName}}</span>
+
+            <span class="delimiter">&bull;</span>
+
+            <ng-template [ngIf]="currentData.stakeStartDate">
+              <span class="beginning">Beginning: {{currentData.stakeStartDate | dateVal}}</span>
+
+              <span class="delimiter">&bull;</span>
+            </ng-template>
+
+            <ng-template [ngIf]="currentData.stakeEndDate">
+              <span class="beginning">Ending: {{currentData.stakeEndDate | dateVal}}</span>
+
+              <span class="delimiter">&bull;</span>
+            </ng-template>
+
+            <ng-template [ngIf]="currentData.stakingCap">
+              <span class="pool-size">Pool Size: {{+currentData.stakingCap | number :'1.2-2'}}</span>
+
+              <span class="delimiter">&bull;</span>
+            </ng-template>
+          </p>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="widget__footer" *ngIf="currentAction === ''">
+        <ng-template [ngIf]="!loggedIn" [ngIfElse]="address">
+            <div class="btn-primary connect" (click)="connectWallet()">Connect Wallet</div>
+        </ng-template>
+        <ng-template #address>
+            <div class="widget__footer_actions" *ngIf="currentData">
+                <div class="row">
+                    <div class="text">
+                        <div class="value">
+                            {{currentData.balance | number :'1.2-2'}}
+                        </div>
+                        <div class="description">
+                            {{data.tokenName}} Balance
+                        </div>
+                    </div>
+                    <div class="btn-primary"
+                         [class.disabled]="currentData.balance === '0' || isDisableStake(currentData?.stakingCap, currentData?.totalStaked)"
+                         (click)="action('stake')"
+                         *ngIf="currentData.canStake"
+                    >
+                      Stake
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text">
+                        <div class="value">
+                            {{currentData.staked | number :'1.2-2'}}
+                        </div>
+                        <div class="description">
+                            {{data.tokenName}} Staked
+                        </div>
+                    </div>
+                    <div class="btn-primary red" [class.disabled]="currentData.staked === '0'" (click)="action('unstake')" *ngIf="currentData.canWithdraw">Unstake</div>
+                </div>
+                <div class="row">
+                    <div class="text">
+                        <ng-template [ngIf]="!data.limit" [ngIfElse]="limit">
+                            <div class="value">
+                                {{currentData.earned | number :'1.2-2'}}
+                            </div>
+                            <div class="description">
+                                LACE Earned
+                            </div>
+                        </ng-template>
+                        <ng-template #limit>
+                            <div class="value">
+                                {{currentData.earned | number :'1.2-2'}}
+                            </div>
+                            <div class="description">
+                                Your reward
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="btn-primary green" [class.disabled]="currentData.earned === '0'" (click)="action('collect')" *ngIf="!data.limit">Collect</div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+
+    <div *ngIf="currentAction === 'stake'" class="stake-container">
+        <app-success-banner *ngIf="isSuccessAction"></app-success-banner>
+        <app-input-area [resetInput]='resetInput' [disabled]="currentLoadingProcess !== ''" (isError)="getInputError($event)" [currency]="data.tokenName" [maxValue]="currentData.balance" [class.active]="isSuccessAction" (valueChange)="getStakeValueChange($event)"></app-input-area>
+        <p class="stake-text-info" *ngIf="data?.stakeText as stakeText">
+          {{stakeText}}
+          See <a href="https://www.lovelace.world/blog" target="_blank" class="link">Blog</a> for details.
+        </p>
+
+        <div class="buttons_wrapper">
+            <div class="btn btn-primary purple"
+                (click)="approve()"
+                [ngClass]="{'opacity': currentLoadingProcess === 'INCREASING'}"
+                [class.disabled]="inputError !== '' || !isIncreaseNeeded || currentLoadingProcess === 'STAKING'">
+                <mat-spinner [diameter]="20" *ngIf="currentLoadingProcess === 'INCREASING'"></mat-spinner>
+                <ng-template [ngIf]="currentLoadingProcess === 'INCREASING'" [ngIfElse]="approveText">Approving...</ng-template>
+                <ng-template #approveText>
+                    <ng-template [ngIf]="lastSuccessAction === 'INCREASE'" [ngIfElse]="successApprove">
+                        <mat-icon svgIcon="check"></mat-icon> Approved
+                    </ng-template>
+                    <ng-template #successApprove>
+                        Approve
+                    </ng-template>
+                </ng-template>
+            </div>
+            <div class="btn btn-primary purple"
+                (click)="stake()"
+                [ngClass]="{'opacity': currentLoadingProcess === 'STAKING'}"
+                [class.disabled]="inputError !== '' || isIncreaseNeeded || currentLoadingProcess === 'INCREASING' || currentTokenValue === '0' || currentTokenValue === ''">
+                <mat-spinner [diameter]="20" *ngIf="currentLoadingProcess === 'STAKING'"></mat-spinner>
+                <ng-template [ngIf]="currentLoadingProcess === 'STAKING'" [ngIfElse]="stakeText">Staking...</ng-template>
+                <ng-template #stakeText>
+                    Stake
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="currentAction === 'unstake'" class="stake-container">
+        <app-success-banner *ngIf="isSuccessAction"></app-success-banner>
+        <app-input-area [resetInput]="resetInput"
+                        [disabled]="currentLoadingProcess !== ''"
+                        [currency]="data.tokenName"
+                        [maxValue]="maxUnstakeVal"
+                        [class.active]="isSuccessAction"
+                        (isError)="getInputError($event)"
+                        (valueChange)="getStakeValueChange($event)"
+        >
+        </app-input-area>
+        <p class="stake-text-info" *ngIf="unstakeData">
+          This staking pool has a cooldown period of {{getPeriodInDays(unstakeData?.cooldownPeriod)}} days. At the moment, you have the opportunity to unstake {{ maxUnstakeVal | number :'1.2-2' }} {{data?.tokenName}} tokens, which is {{ (getPercentsForPeriod() * 100 > 100 ? 100 : percent | number :'1.2-2') }}% of the staked coins.
+        </p>
+      <div class="buttons_wrapper">
+            <div class="btn full btn-primary red"
+                (click)="unstake()"
+                [class.disabled]="inputError !== '' || currentTokenValue === '0'"
+                [ngClass]="{'opacity': currentLoadingProcess === 'UNSTAKING'}">
+                <mat-spinner [diameter]="20" *ngIf="currentLoadingProcess === 'UNSTAKING'"></mat-spinner>
+                <ng-template [ngIf]="currentLoadingProcess === 'UNSTAKING'" [ngIfElse]="approveText">Unstaking...</ng-template>
+                <ng-template #approveText>
+                    <ng-template [ngIf]="lastSuccessAction === ''" [ngIfElse]="successUnstake">
+                        Unstake
+                    </ng-template>
+                    <ng-template #successUnstake>
+                        <mat-icon class="no-opacity" svgIcon="check"></mat-icon> Unstaked
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="currentAction === 'collect'">
+        <app-success-banner *ngIf="isSuccessAction"></app-success-banner>
+        <div [class.active]="isSuccessAction" class="collect-value">{{currentData.earned | number:'1.2-2'}}</div>
+        <div class="buttons_wrapper">
+            <div class="btn full btn-primary green"
+                (click)="collect()"
+                [class.disabled]="isSuccessAction"
+                [ngClass]="{'opacity': currentLoadingProcess === 'COLLECTING'}">
+                <mat-spinner [diameter]="20" *ngIf="currentLoadingProcess === 'COLLECTING'"></mat-spinner>
+                <ng-template [ngIf]="currentLoadingProcess === 'COLLECTING'" [ngIfElse]="approveText">Collecting...</ng-template>
+                <ng-template #approveText>
+                    <ng-template [ngIf]="lastSuccessAction === ''" [ngIfElse]="successCollect">
+                        Collect
+                    </ng-template>
+                    <ng-template #successCollect>
+                        <mat-icon svgIcon="check"></mat-icon> Collected
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

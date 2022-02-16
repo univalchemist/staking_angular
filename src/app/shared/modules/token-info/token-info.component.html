@@ -1,0 +1,37 @@
+<div class="creeping-line">
+  <ng-template [ngIf]="tokenInfo">
+    <div class="creeping-line-container" *ngFor="let item of [undefined, undefined]">
+      <p class="text"
+         *ngFor="let item of [undefined, undefined]"
+      >
+        <span class="price">Price: ${{tokenInfo.price | number :'1.2-2'}}</span>
+
+        <span class="delimiter">&bull;</span>
+
+        <span class="market-cap">Market cap: ${{tokenInfo.marketCap | number :'1.2-2'}}</span>
+
+        <span class="delimiter">&bull;</span>
+
+        <span class="fully-diluted-market-cap">Fully Diluted Market Cap: ${{tokenInfo.fullyDilutedMarketCap | number :'1.2-2'}}</span>
+
+        <span class="delimiter">&bull;</span>
+
+        <span class="volume">Volume 24h: ${{tokenInfo.volume24h | number :'1.2-2'}}</span>
+
+        <span class="delimiter">&bull;</span>
+
+        <span class="circulating-supply">Self Reported Circulating Supply: {{tokenInfo.circulatingSupply | number :'1.2-2'}} LACE</span>
+
+        <span class="delimiter">&bull;</span>
+
+        <span class="max-supply">Max Supply: {{tokenInfo.maxSupply | number :'1.2-2'}}</span>
+
+        <span class="delimiter">&bull;</span>
+
+        <span class="total-supply">Total Supply: {{tokenInfo.totalSupply | number :'1.2-2'}}</span>
+
+        <span class="delimiter">&bull;</span>
+      </p>
+    </div>
+  </ng-template>
+</div>

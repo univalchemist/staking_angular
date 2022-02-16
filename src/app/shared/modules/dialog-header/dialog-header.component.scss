@@ -1,0 +1,44 @@
+@use 'common' as c;
+
+:host {
+  display: block;
+  padding-bottom: c.px2rem(22);
+}
+
+.dialog-header {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-title {
+  margin: 0 c.px2rem(15) 0 0;
+  font-weight: 700;
+  font-size: c.px2rem(20);
+  line-height: c.px2rem(28);
+  color: c.$white;
+}
+
+.filter-search {
+  width: c.px2rem(516);
+  margin: auto 0 auto auto;
+  max-width: calc(100% - #{c.px2rem(300)});
+}
+
+@media screen and (max-width: 600px) {
+  :host {
+    padding-bottom: c.px2rem(22, c.$mobile_size);
+  }
+  
+  .dialog-title {
+    margin: 0 c.px2rem(15, c.$mobile_size) 0 0;
+    font-size: c.px2rem(20, c.$mobile_size);
+    line-height: c.px2rem(28, c.$mobile_size);
+  }
+  
+  .filter-search {
+    width: c.px2rem(516, c.$mobile_size);
+    max-width: calc(100% - #{c.px2rem(300, c.$mobile_size)});
+  }
+}
